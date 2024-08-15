@@ -10,7 +10,7 @@ function SideBar() {
        <div className='flex py-1 px-2 align-top w-max space-y-5 gap-28'>
        <h1 className='font-bold text-2xl p-4 flex '>Chats </h1>
        <BiCommentAdd className='flex  size-6 space-y-1 text-zinc-500' /> 
-       <CgMoreVerticalAlt  className='size-6 ml-3'/>
+       <CgMoreVerticalAlt  className='size-6 my-2'/>
        </div>
         <Search/>
         <Users/>

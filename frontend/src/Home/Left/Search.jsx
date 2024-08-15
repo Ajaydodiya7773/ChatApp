@@ -2,7 +2,7 @@ import React from 'react'
 import { IoMdSearch } from "react-icons/io";
 function Search() {
   return (
-    <div>
+    <div className='h-[10vh]'>
       <form action="" className='py-2 ml-2 flex w-full'>
       <input
   type="text"
