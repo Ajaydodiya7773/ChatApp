@@ -6,11 +6,17 @@ import Users from '../Right/Users';
 function SideBar() {
   return (
     <>
-      <div className=' w-[30%] bg-stone-900 drop-shadow-2xl  px-11 text-white' >
-       <div className='flex py-1 px-2 align-top w-max space-y-5 gap-28'>
-       <h1 className='font-bold text-2xl p-4 flex '>Chats </h1>
-       <BiCommentAdd className='flex  size-6 space-y-1 text-zinc-500' /> 
-       <CgMoreVerticalAlt  className='size-6 my-2'/>
+      <div className=' w-[30%] bg-gray-900y drop-shadow-2xl  px-6 py-1 text-white' >
+       <div className='flex gap-3'>
+       <div className='flex-1 w-24 '>
+       <h1 className='font-bold text-2xl p-4 flex relative'>Chats </h1>
+       </div>
+       <div className='flex-1 w-14 py-5'>
+       <BiCommentAdd className='flex justify-end size-6 space-y-1 text-zinc-500  hover:bg-slate-700' /> 
+       </div>
+       <div className='flex py-2'>
+        <CgMoreVerticalAlt  className='size-6 my-2 '/>
+        </div>
        </div>
         <Search/>
         <Users/>
