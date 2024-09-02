@@ -16,7 +16,7 @@ function Users() {
         </h3>
       </div>
    
-    <div style={{ maxHeight:"calc(84vh - 1vh)" }} className="flex-aj overflow-y-auto py-1 ">
+    <div style={{ maxHeight:"calc(84vh - 10vh)" }} className="flex-aj overflow-y-auto py-1 ">
     <User />
       <User /> 
       <User /> 

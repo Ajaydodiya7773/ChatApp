@@ -4,7 +4,7 @@ import { IoMdSend } from "react-icons/io";
 function Tpye() {
   return (
     <>
-<div className='p-10 ml-7' style={{minHeight:"calc(92vh - 8vh) text-center"}}>
+<div className='p-10 ml-7'>
 <div className='flex space-x-1 justify-center max-h-1.5'>
 <input
   type="text"
