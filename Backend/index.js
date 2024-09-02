@@ -11,6 +11,7 @@ try {
     mongoose.connect(URI);
     console.log("Connected to MongoDB");
 } catch (error) {
+    console.log("Error")
     
 }
 
