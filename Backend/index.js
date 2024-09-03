@@ -5,9 +5,9 @@ import userRoute from "./Route/user.router.js";
 
 const app = express()
 dotenv.config();
-app.use(express.json());
+app.use(express.json())
 
-const PORT =process.env.PORT || 5000;
+const PORT =process.env.PORT || 5001;
 const URI = process.env.MOGODB_URI;
 try {
     mongoose.connect(URI);
