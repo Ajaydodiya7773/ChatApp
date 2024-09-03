@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
         },
 },
 {
-timestampes: true, //userCrated , UpdetedAt    
+timestampes: true, //userCrated ,UpdetedAt    
 });
 const User = mongoose.model("User",userSchema);
 export default User;
