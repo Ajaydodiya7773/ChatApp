@@ -1,12 +1,51 @@
+import { useForm } from "react-hook-form"
+
 export default function Signup() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+  const password = watch("password");
+  const validatePasswordMatch = (value) => {
+    return value === password || "password can't match";
+  }
+
+  const onSubmit = (data) => console.log(data)
   return (
+    
     <>
       <div className="flex h-screen justify-center items-center  ">
-        <form action="" className="border rounded-lg  shadow-transparent bg-neutral rounded-box max-w-md space-y-3 p-4  ">
-          <h1 className="text-4xl py-5">Welcome to Whatsapp</h1>
-          <h2 className="text-xl py-1"> Create A New <span className="text-blue-600 font-semibold">Account</span> </h2>
+        <form
+        
+          className="border rounded-lg  shadow-transparent bg-neutral rounded-box max-w-md space-y-3 p-4  "
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <h1 className="text-green-300 text-4xl py-5 font-bold">
+            Welcome to WhatsappX
+          </h1>
+          <h2 className="text-xl py-1">
+            {" "}
+            Create A New{" "}
+            <span className="text-blue-600 font-semibold">Account</span>{" "}
+          </h2>
+
+           {/* Username */}
+           <label className="input input-bordered flex items-center gap-2">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="h-4 w-4 opacity-70"
+            >
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+            </svg>
+            <input type="text" className="grow" placeholder="Username" {...register("fullname", { required: true })} />
+          </label>
+            {errors.fullname && <span className="text-red-600 text-sm font-semibold">This field is required</span>}
           {/* Email */}
- 
+
           <label className="input input-bordered flex items-center gap-2 py-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -17,20 +56,10 @@ export default function Signup() {
               <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
               <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
             </svg>
-            <input type="text" className="grow" placeholder="Email" />
+            <input type="text" className="grow" placeholder="Email" {...register("email", { required: true })} />
           </label>
-          {/* Username */}
-          <label className="input input-bordered flex items-center gap-2">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              className="h-4 w-4 opacity-70"
-            >
-              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-            </svg>
-            <input type="text" className="grow" placeholder="Username" />
-          </label>
+            {errors.email && <span className="text-red-600 text-sm font-semibold" >This field is required</span>}
+         
           {/* password */}
           <label className="input input-bordered flex items-center gap-2">
             <svg
@@ -45,9 +74,10 @@ export default function Signup() {
                 clipRule="evenodd"
               />
             </svg>
-            <input type="password" className="grow" value="password" />
+            <input type="password" className="grow" placeholder="Password" {...register("password", { required: true })} />
           </label>
-           {/* Confirm Password */}
+            {errors.password && <span className="text-red-600 text-sm font-semibold ">This field is required</span>}
+          {/* Confirm Password */}
           <label className="input input-bordered flex items-center gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -61,12 +91,24 @@ export default function Signup() {
                 clipRule="evenodd"
               />
             </svg>
-            <input type="password" className="grow" value="password" />
+            <input type="password" className="grow" placeholder="Confirm Password"  {...register("ConfrimPassword", { required: true, validate:validatePasswordMatch, })}/>
           </label>
-
+            {errors.confirmpassword && <span className="text-red-600 text-sm font-semibold">This field is required</span>}
           {/* text & Button */}
-          <p>Have an account? Login</p>
-          <input type="submit"  value={Signup}/>
+          <div>
+        
+           
+             <div className="flex justify-center ">
+             <input type="submit" value="Signup" className="text-white bg-blue-500 w-full rounded-lg py-2 cursor-pointer"/>
+             </div>
+            
+            <p>
+              Already have an account?{" "}
+              <span className="text-red-300 underline cursor-pointer font-semibold space-x-3">
+                Login
+              </span>{" "}
+            </p>
+          </div>
         </form>
       </div>
     </>
