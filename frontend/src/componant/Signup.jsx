@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form"
-
+import axios from "axios"
 export default function Signup() {
   const {
     register,
@@ -7,19 +7,34 @@ export default function Signup() {
     watch,
     formState: { errors },
   } = useForm()
-  const password = watch("password");
+  const password = watch("password","");
+  const confirmpassword = watch("confirmpassword","");
   const validatePasswordMatch = (value) => {
-    return value === password || "password can't match";
-  }
+    return value === password  || "password can't match";
+  };
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => {
+    const userInfo = {
+      name: data.name,
+      email:data.email,
+      password:data.password,
+      confirmpassword:data.confirmpassword
+    }
+    axios.post("http://localhost:5000/user/signup",userInfo)
+    .then((Response) => {
+      console.log(Response.data)
+    })    
+    .catch((error)=>{
+      console.error(error);
+    });
+  }
   return (
     
     <>
       <div className="flex h-screen justify-center items-center  ">
         <form
         
-          className="border rounded-lg  shadow-transparent bg-neutral rounded-box max-w-md space-y-3 p-4  "
+          className="border rounded-lg  shadow-transparent bg-neutral  max-w-md space-y-3 p-4  "
           onSubmit={handleSubmit(onSubmit)}
         >
           <h1 className="text-green-300 text-4xl py-5 font-bold">
@@ -91,9 +106,10 @@ export default function Signup() {
                 clipRule="evenodd"
               />
             </svg>
-            <input type="password" className="grow" placeholder="Confirm Password"  {...register("ConfrimPassword", { required: true, validate:validatePasswordMatch, })}/>
+            <input type="password" className="grow" placeholder="ConfirmPassword"  {...register("confirmpassword", { required: true, validate:validatePasswordMatch, })}/>
           </label>
-            {errors.confirmpassword && <span className="text-red-600 text-sm font-semibold">This field is required</span>}
+            {errors.confirmpassword && <span className="text-red-600 text-sm font-semibold  ">{errors.confirmpassword.message
+            }</span>}
           {/* text & Button */}
           <div>
         
