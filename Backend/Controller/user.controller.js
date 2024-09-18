@@ -38,7 +38,9 @@ export const signup = async (req, res) => {
         createTokenAndSaveCookie(newUser._id,res);
 
         // Send a success response
-        res.status(201).json({ message: "User registered successfully", newUser});
+        res.status(201).json({ message: "User registered successfully",  _id:newUser._id,
+            name:newUser.name,
+            email:newUser.email,});
 
     } catch (error) {
         console.error("Error during signup:", error.message);

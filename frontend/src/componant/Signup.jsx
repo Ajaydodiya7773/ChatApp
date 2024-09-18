@@ -10,24 +10,35 @@ export default function Signup() {
   const password = watch("password","");
   const confirmpassword = watch("confirmpassword","");
   const validatePasswordMatch = (value) => {
-    return value === password  || "password can't match";
+    return value === password || "Passwords don't match";
   };
-
+  
   const onSubmit = (data) => {
     const userInfo = {
-      name: data.name,
-      email:data.email,
-      password:data.password,
-      confirmpassword:data.confirmpassword
-    }
-    axios.post("http://localhost:5000/user/signup",userInfo)
-    .then((Response) => {
-      console.log(Response.data)
-    })    
-    .catch((error)=>{
-      console.error(error);
-    });
-  }
+      name: data.fullname, // Should this be fullname?
+      email: data.email,
+      password: data.password,
+      confirmpassword: data.confirmpassword,
+    };
+  
+    console.log("User Info:", userInfo);  // Add this line to check the data being sent
+  
+    axios.post("http://localhost:5000/user/signup", userInfo)
+      .then((response) => {
+        console.log(response.data);
+
+        if(response.data){
+          alert("Signup Succesfully you can login")
+        }
+        localStorage.setItem("Messenger",JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        if(error.response){
+          alert("Error:"+ error.response.data.error);
+        }
+      });
+  };
+  
   return (
     
     <>
@@ -106,10 +117,9 @@ export default function Signup() {
                 clipRule="evenodd"
               />
             </svg>
-            <input type="password" className="grow" placeholder="ConfirmPassword"  {...register("confirmpassword", { required: true, validate:validatePasswordMatch, })}/>
+            <input type="password" className="grow" placeholder="ConfirmPassword" {...register("confirmpassword", { required: true, validate: validatePasswordMatch })}/>
           </label>
-            {errors.confirmpassword && <span className="text-red-600 text-sm font-semibold  ">{errors.confirmpassword.message
-            }</span>}
+          {errors.confirmpassword && <span className="text-red-600 text-sm font-semibold">{errors.confirmpassword.message}</span>}
           {/* text & Button */}
           <div>
         

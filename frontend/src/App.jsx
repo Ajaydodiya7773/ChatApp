@@ -3,8 +3,8 @@
 // import Chats from "./Home/Right/Chats";
 // import Logout from "./Home/Left1/Logout";
 
-// import Login from "./componant/Login";
-import Signup from "./componant/signup";
+import Login from "./componant/Login";
+// import Signup from "./componant/signup";
 
 
 
@@ -16,8 +16,8 @@ function App() {
         <SideBar />
         <Chats />
       </div> */}
-    <Signup/>
-    {/* <Login/> */}
+    {/* <Signup/> */}
+    <Login/>
     </>
 
   );

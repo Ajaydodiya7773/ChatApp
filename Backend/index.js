@@ -2,11 +2,11 @@ import express from "express";
 import dotenv from "dotenv"
 import mongoose from "mongoose";
 import userRoute from "./Route/user.router.js";
-
+import cors from "cors";
 const app = express()
 dotenv.config();
 app.use(express.json())
-
+app.use(cors()); // isko hum isliye import karwate hai Taki hamara backend and frontend ek jagh run kare
 const PORT =process.env.PORT || 5001;
 const URI = process.env.MOGODB_URI;
 try {
