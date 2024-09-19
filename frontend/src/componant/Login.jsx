@@ -1,7 +1,9 @@
 import axios from "axios"
 import { useForm } from "react-hook-form"
-export default function Login() {
+import { useAuth } from "../contex/Authprovider";
 
+export default function Login() {
+  const { authUser,setAuthUser } = useAuth();
   const onSubmit = (data) => {
     const userInfo = {
       
@@ -21,6 +23,7 @@ export default function Login() {
           alert("Login Succesfull");
         }
         localStorage.setItem("Messenger", JSON.stringify(response.data));
+        setAuthUser(response.data); // Set the authenticated user data
       })
       .catch((error) => {
         if (error.response) {
