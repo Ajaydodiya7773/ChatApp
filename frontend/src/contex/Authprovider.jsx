@@ -1,46 +1,27 @@
-import React, { createContext, useContext} from "react";
-import Cookies from "js-cookie";
+import { createContext, useContext, useState, useEffect } from "react";
 
-// Create an AuthContext for the app
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const Authprovider= ({children}) =>  {
-    // Get initial state from cookies or local storage
-  const getInitialAuthState = () => {
-    const cookieJWT = Cookies.get("jwt");
-    const localStorageUser = localStorage.getItem("Messenger");
-    
-    try {
-      // Parse the JSON safely
-      if (cookieJWT) return JSON.parse(cookieJWT);
-      if (localStorageUser) return JSON.parse(localStorageUser);
-    } catch (error) {
-      console.error("Failed to parse auth state:", error);
-      return null;
+export function Authprovider({ children }) {
+  const [authUser, setAuthUser] = useState(null);  // Holds the authenticated user
+  const [loading, setLoading] = useState(true);    // Loading state for async auth checks
+
+  useEffect(() => {
+    // Example: Simulate checking local storage or API call for user auth
+    const user = localStorage.getItem("user");  // or an API call
+    if (user) {
+      setAuthUser(JSON.parse(user));            // Set authUser if user found
     }
-
-    return null;
-  };
-
-  // Initialize authUser state
-  const [authUser, setAuthUser] = React.useState(getInitialAuthState());
-
-  // Function to log out the user (clear cookies and localStorage)
-  const logout = () => {
-    Cookies.remove("jwt");
-    localStorage.removeItem("Messenger");
-    setAuthUser(null);
-  };
+    setLoading(false);                          // Set loading to false once done
+  }, []);
 
   return (
-     // Provide the authUser and setter function to the rest of the app
-    <>
-    <AuthContext.Provider value={{ authUser, setAuthUser, logout }}>
+    <AuthContext.Provider value={{ authUser, setAuthUser, loading }}>
       {children}
-    </AuthContext.Provider> 
-    </>
-  )
+    </AuthContext.Provider>
+  );
 }
 
-// Custom hook to easily access the auth context
-export const useAuth = () => useContext(AuthContext);
+export function useAuth() {
+  return useContext(AuthContext);
+}

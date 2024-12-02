@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useAuth } from "../contex/Authprovider";
+import { Link } from "react-router-dom";
 
 
 export default function Signup() {
@@ -157,7 +158,7 @@ export default function Signup() {
 
           <p>
             Already have an account?{" "}
-            <span className="text-red-300 underline cursor-pointer font-semibold">Login</span>
+            <Link to={"/login"} className="text-red-300 underline cursor-pointer font-semibold">Login</Link>
           </p>
         </form>
       </div>
